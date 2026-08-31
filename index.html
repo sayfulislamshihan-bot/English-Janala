@@ -33,9 +33,10 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
+    <!-- Navbar -->
     <header>
       <nav>
-        <div class="navbar bg-base-100 shadow-sm px-14 bg-[#badeff5b]">
+        <div class="navbar bg-base-100 shadow-sm md:px-16 bg-[#badeff5b]">
           <div class="navbar-start">
             <div class="dropdown">
               <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -58,7 +59,7 @@
             </a>
           </div>
           <div class="navbar-end hidden lg:flex">
-            <ul class="flex gap-3 items-center">
+            <ul class=" none flex gap-3 items-center">
               <li><a href=""><button class="btn btn-dash btn-primary"><i class="fa-solid fa-circle-question" style="color: rgba(15, 61, 129, 0.913);"></i>FAQ</button></a></li>
 
               <li><a href=""><button class="btn btn-dash btn-primary"><i class="fa-solid fa-book-open" style="color: rgba(15, 61, 129, 0.886);"></i>Learn</button></a></li>
@@ -69,5 +70,31 @@
         </div>
       </nav>
     </header>
+
+    <!-- Banner -->
+    <section class="Banner">
+      <div class="hero bg-base-200 mx-auto md:py-8">
+        <div class="hero-content flex-col lg:flex-row-reverse gap-x-56 ">
+          <img
+            alt="Tailwind CSS hero component"
+            src="./assets/hero-student.png"
+            class="max-w-72 md:max-w-sm rounded-lg"
+          />
+          <div>
+            
+           <h1 class="md:text-5xl text-3xl font-bold text-center md:text-left"><span class="text-[#00BCFF]">English</span> is Easy!!</h1> <p class="py-6 bangla-font text-[#18181B] max-w-80 md:max-w-96 text-center md:text-left">
+              আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ 
+            </p>
+            <div class="flex justify-center md:justify-start">
+              <div class="space-y-3">
+                <input class="block border-gray-400 rounded-sm p-1.5 max-w-80 md:max-w-80" type="text" name="" id="" placeholder="Enter Your Name">
+                <input class="block border-gray-400 rounded-sm p-1.5 max-w-80 md:max-w-80" type="password" name="" id="" placeholder="Enter Password">
+                <button class="btn btn-primary block text-center"><a href="./index.html">Get Started</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
