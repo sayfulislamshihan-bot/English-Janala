@@ -142,6 +142,28 @@ const displayLessonWords = (wordArr,lesson) =>{
 };
 
 
+document.getElementById("btn-search").addEventListener("click",async ()  => {
+  removeActive();
+  const input = document.getElementById("input-search");
+  const searchValue = input.value.trim().toLowerCase();
+  console.log(searchValue);
 
+  const res = await fetch("https://openapi.programming-hero.com/api/words/all");
+  const data = await res.json();
+  const allWords = data.data;
+  console.log(allWords);
+  const filterWords = allWords.filter((word) => word.word.toLowerCase().includes(searchValue));
+  console.log(filterWords);
+  displayLessonWords(filterWords);
+  
+    // .then((res) => res.json())
+    // .then((data) => {
+    //   const allWords = data.data;
+    //   const filterWords = allWords.filter((word) =>
+    //     word.word.toLowerCase().includes(searchValue)
+    //   
 
+    //   
+    // });
+});
 
