@@ -1,8 +1,13 @@
+const createElements = (arr) => {
+    let htmlElements = arr.map((el) => `<span class="btn">${el}</span>`);
+    return (htmlElements.join(" "));
+};
+
 const loadLessons = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/levels/all");
     const lessonsObject = await res.json();
     displayLessons(lessonsObject.data);
-}
+};
 loadLessons();
 
 const displayLessons = (lessons) => {
@@ -19,7 +24,7 @@ const displayLessons = (lessons) => {
         //    4.append element
         lessonsContainer.append(btnDiv);
     });
-}
+};
 
 const removeActive = () => {
     const lessonButtons = document.querySelectorAll(".lesson-btn");
@@ -35,7 +40,54 @@ const loadLessonWords = async (lesson) => {
     removeActive(); //remove all active class
     const clickBtn = document.getElementById(`lesson-btn-${lesson}`);
     clickBtn.classList.add("active") //add active class   
-} 
+};
+
+const loadWordDetails = async (id) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/word/${id}`);
+    const data = await res.json();
+    displayWordDetails(data.data);
+    console.log(data.data);
+};
+
+// id: 5
+// level: 1
+// meaning: "আগ্রহী"
+// partsOfSpeech: "adjective"
+// points: 1
+// pronunciation: "ইগার"
+// sentence: "The kids were eager to open their gifts."
+// synonyms: (3) ['enthusiastic', 'excited', 'keen']
+// word: "Eager"
+    const displayWordDetails = async (details) => {
+        const detailsContainer = document.getElementById("details-container");
+        detailsContainer.innerHTML = `
+        <div class="space-y-3">
+            <div>
+            <h1 class="text-4xl font-semibold">${details.word} (<i class="fa-solid fa-microphone-lines"></i>: ${details.pronunciation})</h1>
+            </div>
+
+            <div>
+            <h4 class="text-2xl font-semibold">Meaning</h4>
+            <p class="text-2xl font-medium">${details.meaning}</p>
+            </div>
+
+            <div>
+            <h4 class="text-2xl font-semibold">Example</h4>
+            <p class="text-2xl text-gray-600">${details.sentence}</p>
+            </div>
+        
+            <div class="space-y-2">
+            <p class="bangla-font text-2xl">Synonnyms / সমার্থক শব্দ গুলো</p>
+            <div class="">${createElements(details.synonyms)}</div>
+            </div>
+
+            <div>
+            <button class="btn btn-primary px-5 py-1 rounded-xl">Complete Learning</button>
+            </div>
+        </div>
+        `
+        document.getElementById("word_modal").showModal();
+    };
 
 const displayLessonWords = (wordArr,lesson) =>{
     let wordContainer = document.getElementById("word-container");
@@ -62,7 +114,7 @@ const displayLessonWords = (wordArr,lesson) =>{
               <p class="text-[25px] font-semibold text-[#18181bc1] bangla-font">${wordElement.meaning? wordElement.meaning : "অর্থ পাওয়া যায়নি"} / ${wordElement.pronunciation ? wordElement.pronunciation : "উচ্চারণ পাওয়া যায়নি"}</p>
             </div>
             <div class="flex justify-between">
-               <button onclick="my_modal_5.showModal()" class="p-2 bg-[#399fed41] rounded-sm hover:bg-[#399fedba] cursor-pointer ..."><i class="fa-solid fa-circle-info" style="color: rgb(16, 32, 55);"></i></button>
+               <button onclick="loadWordDetails(${wordElement.id})" class="p-2 bg-[#399fed41] rounded-sm hover:bg-[#399fedba] cursor-pointer ..."><i class="fa-solid fa-circle-info" style="color: rgb(16, 32, 55);"></i></button>
                <button class="p-2 bg-[#399fed41] rounded-sm hover:bg-[#399fedba] cursor-pointer ..."> <i class="fa-solid fa-volume" style="color: rgb(16, 32, 55);"></i></button>
               
             </div>
@@ -70,7 +122,7 @@ const displayLessonWords = (wordArr,lesson) =>{
 
         wordContainer.append(wordCard);
     });
-}
+};
 
 
 
