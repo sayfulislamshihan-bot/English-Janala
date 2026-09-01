@@ -3,6 +3,13 @@ const createElements = (arr) => {
     return (htmlElements.join(" "));
 };
 
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
+
 const manageSpinner = (status) => {
     if(status === true){
         let spinner = document.getElementById("spinner");
@@ -131,7 +138,7 @@ const displayLessonWords = (wordArr,lesson) =>{
             </div>
             <div class="flex justify-between">
                <button onclick="loadWordDetails(${wordElement.id})" class="p-2 bg-[#399fed41] rounded-sm hover:bg-[#399fedba] cursor-pointer ..."><i class="fa-solid fa-circle-info" style="color: rgb(16, 32, 55);"></i></button>
-               <button class="p-2 bg-[#399fed41] rounded-sm hover:bg-[#399fedba] cursor-pointer ..."> <i class="fa-solid fa-volume" style="color: rgb(16, 32, 55);"></i></button>
+               <button onclick="pronounceWord('${wordElement.word}')" class="p-2 bg-[#399fed41] rounded-sm hover:bg-[#399fedba] cursor-pointer ..."> <i class="fa-solid fa-volume" style="color: rgb(16, 32, 55);"></i></button>
               
             </div>
           </div>`;
